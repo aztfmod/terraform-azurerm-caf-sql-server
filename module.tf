@@ -51,12 +51,12 @@ resource "azurerm_sql_server" "sql_server" {
 
 resource "azurerm_sql_virtual_network_rule" "sql_vnet_rule" {
   ## create only if we have a non-empty subnet ID passed
-  count = var.subnet_id != "" ? 1 : 0
+  for_each = var.subnet_id_list
 
-  name                = "${azurerm_sql_server.sql_server.name}-vnet-rule"
+  name                = substr(basename(each.value), 0,63)
   resource_group_name = var.resource_group_name
   server_name         = azurerm_sql_server.sql_server.name
-  subnet_id           = var.subnet_id
+  subnet_id           = each.value
 }
 
 resource "azurerm_sql_active_directory_administrator" "admins" {
@@ -71,16 +71,18 @@ resource "azurerm_sql_active_directory_administrator" "admins" {
 }
 
 resource "azurerm_sql_elasticpool" "sql_server_elastic_pool" {
-  ## create only if elastic_pool object is present
-  count = lookup(var.sql_server, "elastic_pool", {}) != {} ? 1 : 0
+  ## create only if elastic_pool object is filled
+  for_each            = var.sql_server.elastic_pool
+  ## dependencies in order for changes not to be concurrent on the object and get an error
+  depends_on          = [azurerm_sql_virtual_network_rule.sql_vnet_rule, azurerm_sql_active_directory_administrator.admins ]
 
-  name                = var.sql_server.elastic_pool.name
+  name                = each.value.name
   resource_group_name = var.resource_group_name
   location            = var.location
   server_name         = azurerm_sql_server.sql_server.name
-  edition             = var.sql_server.elastic_pool.edition
-  dtu                 = var.sql_server.elastic_pool.dtu
-  db_dtu_min          = var.sql_server.elastic_pool.db_dtu_min
-  db_dtu_max          = var.sql_server.elastic_pool.db_dtu_max
-  pool_size           = var.sql_server.elastic_pool.pool_size
+  edition             = each.value.edition
+  dtu                 = each.value.dtu
+  db_dtu_min          = each.value.db_dtu_min
+  db_dtu_max          = each.value.db_dtu_max
+  pool_size           = each.value.pool_size
 }

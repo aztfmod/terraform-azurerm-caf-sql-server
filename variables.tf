@@ -75,10 +75,10 @@ variable "sql_server"{
     
 }
 
-variable "subnet_id"{
-    description = "(Optional) Subnet identifier for the resource to be created"
-    type = string
-    default = ""
+variable "subnet_id_list"{
+    description = "(Optional) List of subnet identifiers for the resource to be created"
+    # type = list(string)
+    # default = ""
 }
 
 variable "aad_admin"{

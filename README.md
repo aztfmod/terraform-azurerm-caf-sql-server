@@ -6,7 +6,7 @@ Creates an Azure SQL Server with:
 * SQL Server Elastic pool
 * SQL Server Administrator
 * SQL Server Azure AD Administrators
-* Attach SQL Server to virtual network
+* Firewall: Restrict SQL Server to specific virtual subnets
 * Diagnostics logging for SQL Server
 
 
@@ -47,7 +47,7 @@ module "sql_server" {
 | postfix | string | None | (Optional) Postfix to be used. |
 | max_length | string | None | (Optional) maximum length to the name of the resource. |
 | sql_server | object | None | (Required) SQL Server Configuration object (see details below). |
-| subnet_id | string | None | (Optional) Subnet identifier for the resource to be created |
+| subnet_id_list | string | None | (Optional) Subnet identifier for the resource to be created |
 | aad_admin | object | None | (Optional) Azure AD object to use as SQL Server administrator |
 
 

@@ -48,7 +48,29 @@ data "azurerm_storage_account" "diagnostics_storage" {
   resource_group_name = azurerm_resource_group.rg_test.name
 }
 
+data "azurerm_subnet" "vnet_test" {
+
+  name = basename(module.vnet_test.vnet_subnets[local.vnet_config.subnets.subnet1.name])
+  virtual_network_name  = module.vnet_test.vnet.vnet_name
+  resource_group_name   = azurerm_resource_group.rg_test.name
+}
+
 data "azurerm_client_config" "current" {
+}
+
+module "vnet_test" {
+  source  = "aztfmod/caf-virtual-network/azurerm"
+  version = "2.0.1"
+    
+  convention                        = local.convention
+  resource_group_name               = azurerm_resource_group.rg_test.name
+  prefix                            = local.prefix
+  location                          = local.location
+  networking_object                 = local.vnet_config
+  tags                              = local.tags
+  diagnostics_map                   = module.diags_test.diagnostics_map
+  log_analytics_workspace           = module.la_test
+  diagnostics_settings              = local.vnet_config.diagnostics
 }
 
 module "sql_server_demo" {
@@ -68,5 +90,3 @@ module "sql_server_demo" {
   log_analytics_workspace     = module.la_test
   diagnostics_settings        = local.diagnostics
 }
-
-
