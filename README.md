@@ -23,7 +23,7 @@ module "sql_server" {
     resource_group_name         = azurerm_resource_group.rg_test.name
     location                    = local.location
     sql_server                  = local.sql_server
-    subnet_id                   = local.subnet_id
+    subnet_id_list              = local.subnet_id_list
     aad_admin                   = local.aad_admin
 
     diagnostics_map             = module.diags_test.diagnostics_map
