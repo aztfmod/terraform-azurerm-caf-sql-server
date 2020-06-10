@@ -1,24 +1,20 @@
-# Azure SQL Server
+## Requirements
 
-Creates a simple Azure SQL Server
+No requirements.
 
-## Usage
+## Providers
 
-To run this example, simply execute:
+| Name | Version |
+|------|---------|
+| azurecaf | n/a |
+| azurerm | n/a |
 
-```hcl
-terraform init
-terraform plan
-terraform apply
-```
+## Inputs
 
-Once you are done, just run
-```hcl
-terraform destroy
-```
+No input.
 
 ## Outputs
 
-| Name | Type | Description |
-| -- | -- | -- | 
-| object | object | Full object as returned per the module |
+| Name | Description |
+|------|-------------|
+| object | Exports the full SQL Server Object |

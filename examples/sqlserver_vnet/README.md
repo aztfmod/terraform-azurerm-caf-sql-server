@@ -20,5 +20,5 @@ terraform destroy
 ## Outputs
 
 | Name | Type | Description |
-| -- | -- | -- | 
+| -- | -- | -- |
 | object | object | Full object as returned per the module |

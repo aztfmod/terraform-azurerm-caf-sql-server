@@ -34,7 +34,7 @@ module "sql_server" {
 }
 ```
 
-## Inputs 
+## Inputs
 
 | Name | Type | Default | Description |
 | -- | -- | -- | -- |
@@ -84,7 +84,7 @@ variable "sql_server"{
     #         pool_size           = number
     #     })
     # })
-    
+
 }
 ```
 
@@ -168,5 +168,5 @@ diagnostics_settings = {
 | -- | -- | -- |
 | object | object(sensitive) | Returns the full object of the created SQL Server |
 | name | string | Returns the name of the created SQL Server |
-| id | string | Returns the ID of the created SQL Server | 
+| id | string | Returns the ID of the created SQL Server |
 | password | string(sensitive) | Value of the administrative password of the SQL Server - Recommended to get this output and store in AKV|
