@@ -6,13 +6,13 @@
   version: '3.7'
   services:
     rover:
-      image: aztfmod/rover:2006.100800
+      image: aztfmod/roverdev:vnext
 
       labels:
         - "caf=Azure CAF"
 
       volumes:
-        - ..:/tf/rover
+        - ..:/tf/caf
         - volume-caf-vscode:/home/vscode
         - ~/.ssh:/tmp/.ssh-localhost:ro
 
