@@ -1,3 +1,5 @@
+[![VScodespaces](https://img.shields.io/endpoint?url=https%3A%2F%2Faka.ms%2Fvso-badge)](https://online.visualstudio.com/environments/new?name=terraform-azurerm-caf-sql-server&repo=aztfmod/terraform-azurerm-caf-sql-server)
+
 # Creates an Azure SQL Server
 
 Creates an Azure SQL Server with:

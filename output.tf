@@ -1,13 +1,16 @@
 output "object" {
+  description = "Returns the full object of the created SQL Server"
   value = azurerm_sql_server.sql_server
   sensitive = true
 }
 
 output "name" {
+  description = "Returns the name of the created SQL Server"
   value = azurerm_sql_server.sql_server.name
 }
 
 output "id" {
+  description = "Returns the ID of the created SQL Server"
   value = azurerm_sql_server.sql_server.id
 }
 
