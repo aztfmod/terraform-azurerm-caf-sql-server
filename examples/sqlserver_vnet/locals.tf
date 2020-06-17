@@ -65,11 +65,21 @@ locals {
     subnets = {
       subnet1 = {
         name              = "SQL"
-        cidr              = "10.0.0.64/26"
+        cidr              = ["10.0.0.64/26"]
         service_endpoints = ["Microsoft.Sql"]
-        nsg_inbound = [
-          # {"Name", "Priority", "Direction", "Action", "Protocol", "source_port_range", "destination_port_range", "source_address_prefix", "destination_address_prefix" },
-          ["SQL", "100", "Inbound", "Allow", "*", "*", "1433", "*", "*"],
+        nsg_name          = "SQL_nsg"
+        nsg = [
+          {
+            name                       = "SQL",
+            priority                   = "100"
+            direction                  = "Inbound"
+            access                     = "Allow"
+            protocol                   = "TCP"
+            source_port_range          = "*"
+            destination_port_range     = "1433"
+            source_address_prefix      = "*"
+            destination_address_prefix = "*"
+          }
         ]
       }
     }

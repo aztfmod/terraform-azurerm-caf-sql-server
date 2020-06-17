@@ -60,7 +60,7 @@ data "azurerm_client_config" "current" {
 
 module "vnet_test" {
   source  = "aztfmod/caf-virtual-network/azurerm"
-  version = "2.0.1"
+  version = "3.0.0"
 
   convention              = local.convention
   resource_group_name     = azurerm_resource_group.rg_test.name
