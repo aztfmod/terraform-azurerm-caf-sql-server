@@ -52,7 +52,7 @@ No requirements.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | aad\_admin | (Optional) Object containing the Azure AD for the SQL Server admin account | `map` | `{}` | no |
-| convention | (Required) Naming convention method to use | `string` | n/a | yes |
+| convention | n/a | `string` | `"cafrandom"` | no |
 | diagnostics\_map | (Required) contains the SA and EH details for operations diagnostics | `any` | n/a | yes |
 | diagnostics\_settings | (Required) configuration object describing the diagnostics | `any` | n/a | yes |
 | location | (Required) Define the region where the resource groups will be created | `string` | n/a | yes |
@@ -62,8 +62,8 @@ No requirements.
 | prefix | (Optional) You can use a prefix to the name of the resource | `string` | `""` | no |
 | resource\_group\_name | (Required) Name of the resource group where to create the vnet | `string` | n/a | yes |
 | sql\_server | (Required) SQL Server Configuration object | `any` | n/a | yes |
-| subnet\_id\_list | (Optional) List of subnet identifiers for the resource to be created | `any` | n/a | yes |
-| tags | (Required) map of tags for the deployment | `any` | n/a | yes |
+| subnet\_id\_list | (Optional) List of subnet identifiers for the resource to be created | `map(string)` | `{}` | no |
+| tags | (Required) map of tags for the deployment | `map` | `{}` | no |
 
 ## Outputs
 
