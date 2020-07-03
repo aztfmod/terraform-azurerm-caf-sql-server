@@ -5,7 +5,11 @@
 
 name: caf_landing_zones_github_actions 
 
-on: 
+on:
+  push:
+    branches:
+      - master
+      - vnext
   pull_request:
     branches:
       - master

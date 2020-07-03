@@ -1,10 +1,17 @@
 variable "tags" {
   description = "(Required) map of tags for the deployment"
+  type        = map
+  default     = {}
 }
 
-variable "convention" {
-  description = "(Required) Naming convention method to use"
-  type        = string
+variable convention {
+  type    = string
+  default = "cafrandom"
+
+  validation {
+    condition     = contains(["cafrandom", "random", "passthrough", "cafclassic"], var.convention)
+    error_message = "Allowed values are cafrandom, random, passthrough or cafclassic."
+  }
 }
 
 variable "prefix" {
@@ -77,16 +84,18 @@ variable "sql_server" {
 
 variable "subnet_id_list" {
   description = "(Optional) List of subnet identifiers for the resource to be created"
-  # type = list(string)
-  # default = ""
+  type        = map(string)
+  default     = {}
 }
 
 variable "aad_admin" {
   description = "(Optional) Object containing the Azure AD for the SQL Server admin account"
   # type = object({
-  #     name        = string #The login name of the principal to set as the server administrator
-  #     id          = string #The ID of the principal to set as the server administrator
-  #     tenant_id   = string #The Azure Tenant ID
+  #   admin = {
+  #     name      = string #The login name of the principal to set as the server administrator
+  #     id        = string #The ID of the principal to set as the server administrator
+  #     tenant_id = string #The Azure Tenant ID
+  #   }
   # })
   default = {}
 }

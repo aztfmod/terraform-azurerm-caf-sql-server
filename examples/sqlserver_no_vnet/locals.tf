@@ -44,10 +44,5 @@ locals {
     }
   }
   subnet_id_list = {}
-  aad_admin = {
-    # name        = "sqladmin"
-    # tenant_id   = data.azurerm_client_config.current.tenant_id
-    # id          = data.azurerm_client_config.current.client_id
-  }
-  diagnostics = {}
+  diagnostics    = {}
 }

@@ -61,13 +61,14 @@ resource "azurerm_sql_virtual_network_rule" "sql_vnet_rule" {
 
 resource "azurerm_sql_active_directory_administrator" "admins" {
   ## create only if the aad_admin is non-empty
-  count = var.aad_admin != {} ? 1 : 0
+
+  for_each = var.aad_admin
 
   server_name         = azurerm_sql_server.sql_server.name
   resource_group_name = var.resource_group_name
-  login               = var.aad_admin.name
-  object_id           = var.aad_admin.id
-  tenant_id           = var.aad_admin.tenant_id
+  login               = each.value.name
+  object_id           = each.value.id
+  tenant_id           = each.value.tenant_id
 }
 
 resource "azurerm_sql_elasticpool" "sql_server_elastic_pool" {
