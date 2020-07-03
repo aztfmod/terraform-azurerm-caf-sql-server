@@ -1,10 +1,11 @@
 variable "tags" {
-  description = "(Required) map of tags for the deployment"
+  description = "(Required) map of tags for the deployment."
   type        = map
   default     = {}
 }
 
 variable convention {
+  description = "(Required) Naming convention to be used (check at the naming convention module for possible values)."
   type    = string
   default = "cafrandom"
 
@@ -15,47 +16,47 @@ variable convention {
 }
 
 variable "prefix" {
-  description = "(Optional) You can use a prefix to the name of the resource"
+  description = "(Optional) You can use a prefix to the name of the resource."
   type        = string
   default     = ""
 }
 
 variable "postfix" {
-  description = "(Optional) You can use a postfix to the name of the resource"
+  description = "(Optional) You can use a postfix to the name of the resource."
   type        = string
   default     = ""
 }
 
 variable "max_length" {
-  description = "(Optional) You can speficy a maximum length to the name of the resource"
+  description = "(Optional) You can speficy a maximum length to the name of the resource."
   type        = string
   default     = "60"
 }
 
 variable "diagnostics_map" {
-  description = "(Required) contains the SA and EH details for operations diagnostics"
+  description = "(Required) contains the SA and EH details for operations diagnostics."
 }
 
 variable "log_analytics_workspace" {
-  description = "(Required) contains the log analytics workspace details for operations diagnostics"
+  description = "(Required) contains the log analytics workspace details for operations diagnostics."
 }
 
 variable "diagnostics_settings" {
-  description = "(Required) configuration object describing the diagnostics"
+  description = "(Required) Map with the diagnostics settings. See the required structure in the following example or in the CAF diagnostics module documentation."
 }
 
 variable "resource_group_name" {
-  description = "(Required) Name of the resource group where to create the vnet"
+  description = "(Required) Name of the resource group where to create the resource. Changing this forces a new resource to be created."
   type        = string
 }
 
 variable "location" {
-  description = "(Required) Define the region where the resource groups will be created"
+  description = "(Required) Specifies the Azure location to deploy the resource. Changing this forces a new resource to be created."
   type        = string
 }
 
 variable "sql_server" {
-  description = "(Required) SQL Server Configuration object"
+  description = "(Required) SQL Server Configuration object, see Parameters section below."
   # type = object
   # ({
   #     name    = string
@@ -83,13 +84,13 @@ variable "sql_server" {
 }
 
 variable "subnet_id_list" {
-  description = "(Optional) List of subnet identifiers for the resource to be created"
+  description = "(Optional) List of subnet identifiers for the resource to be created."
   type        = map(string)
   default     = {}
 }
 
 variable "aad_admin" {
-  description = "(Optional) Object containing the Azure AD for the SQL Server admin account"
+  description = "(Optional) Azure AD object to use as SQL Server administrator."
   # type = object({
   #   admin = {
   #     name      = string #The login name of the principal to set as the server administrator
