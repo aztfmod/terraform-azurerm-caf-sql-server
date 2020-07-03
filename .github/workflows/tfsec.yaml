@@ -3,17 +3,17 @@
 # Licensed under the MIT License.
 #
 
-name: tfsec 
+name: caf_landing_zones_github_actions 
 
 on:
   push:
-      branches:
-      - vnext
-      - master
+    branches:
+    - vnext
+    - master
 
 jobs:
   tfsec:
-    name: tfsec
+    name: TFsec
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -22,3 +22,16 @@ jobs:
         uses: triat/terraform-security-scan@v1.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      # with:
+      #   ref: ${{ github.event.pull_request.head.ref }}
+    - name: Render terraform docs inside the USAGE.md and push changes back to PR branch
+      uses: Dirrk/terraform-docs@v1.0.8
+      with:
+        tf_docs_working_dir: .
+        tf_docs_output_file: README.md
+        tf_docs_output_method: inject
+        tf_docs_git_push: 'true'

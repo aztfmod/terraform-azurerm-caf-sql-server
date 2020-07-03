@@ -34,24 +34,9 @@ module "sql_server" {
 }
 ```
 
-## Inputs
+<!--- BEGIN_TF_DOCS --->
 
-| Name | Type | Default | Description |
-| -- | -- | -- | -- |
-| resource_group_name | string | None | (Required) Name of the resource group where to create the resource. Changing this forces a new resource to be created. |
-| location | string | None | (Required) Specifies the Azure location to deploy the resource. Changing this forces a new resource to be created.  |
-| tags | map | None | (Required) Map of tags for the deployment.  |
-| log_analytics_workspace | string | None | (Required) Log Analytics Workspace. |
-| diagnostics_map | map | None | (Required) Map with the diagnostics repository information.  |
-| diagnostics_settings | object | None | (Required) Map with the diagnostics settings. See the required structure in the following example or in the diagnostics module documentation. |
-| convention | string | None | (Required) Naming convention to be used (check at the naming convention module for possible values).  |
-| prefix | string | None | (Optional) Prefix to be used. |
-| postfix | string | None | (Optional) Postfix to be used. |
-| max_length | string | None | (Optional) maximum length to the name of the resource. |
-| sql_server | object | None | (Required) SQL Server Configuration object (see details below). |
-| subnet_id_list | string | None | (Optional) Subnet identifier for the resource to be created |
-| aad_admin | object | None | (Optional) Azure AD object to use as SQL Server administrator |
-
+<!--- END_TF_DOCS --->
 
 ## Parameters
 
@@ -160,13 +145,3 @@ diagnostics_settings = {
     ]
 }
 ```
-
-
-## Output
-
-| Name | Type | Description |
-| -- | -- | -- |
-| object | object(sensitive) | Returns the full object of the created SQL Server |
-| name | string | Returns the name of the created SQL Server |
-| id | string | Returns the ID of the created SQL Server |
-| password | string(sensitive) | Value of the administrative password of the SQL Server - Recommended to get this output and store in AKV|
