@@ -5,15 +5,15 @@
 
 name: caf_landing_zones_github_actions 
 
-on:
-  push:
+on: 
+  pull_request:
     branches:
-    - vnext
-    - master
+      - master
+      - vnext
 
 jobs:
   tfsec:
-    name: TFsec
+    name: Run TFsec
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,12 +23,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   docs:
+    name: Run Terraform-docs
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-      # with:
-      #   ref: ${{ github.event.pull_request.head.ref }}
-    - name: Render terraform docs inside the USAGE.md and push changes back to PR branch
+      with:
+        ref: ${{ github.event.pull_request.head.ref }}
+    - name: Run Terraform-docs
       uses: Dirrk/terraform-docs@v1.0.8
       with:
         tf_docs_working_dir: .
