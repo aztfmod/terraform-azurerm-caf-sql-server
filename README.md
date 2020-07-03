@@ -51,19 +51,19 @@ No requirements.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| aad\_admin | (Optional) Object containing the Azure AD for the SQL Server admin account | `map` | `{}` | no |
-| convention | n/a | `string` | `"cafrandom"` | no |
-| diagnostics\_map | (Required) contains the SA and EH details for operations diagnostics | `any` | n/a | yes |
-| diagnostics\_settings | (Required) configuration object describing the diagnostics | `any` | n/a | yes |
-| location | (Required) Define the region where the resource groups will be created | `string` | n/a | yes |
-| log\_analytics\_workspace | (Required) contains the log analytics workspace details for operations diagnostics | `any` | n/a | yes |
-| max\_length | (Optional) You can speficy a maximum length to the name of the resource | `string` | `"60"` | no |
-| postfix | (Optional) You can use a postfix to the name of the resource | `string` | `""` | no |
-| prefix | (Optional) You can use a prefix to the name of the resource | `string` | `""` | no |
-| resource\_group\_name | (Required) Name of the resource group where to create the vnet | `string` | n/a | yes |
-| sql\_server | (Required) SQL Server Configuration object | `any` | n/a | yes |
-| subnet\_id\_list | (Optional) List of subnet identifiers for the resource to be created | `map(string)` | `{}` | no |
-| tags | (Required) map of tags for the deployment | `map` | `{}` | no |
+| aad\_admin | (Optional) Azure AD object to use as SQL Server administrator. | `map` | `{}` | no |
+| convention | (Required) Naming convention to be used (check at the naming convention module for possible values). | `string` | `"cafrandom"` | no |
+| diagnostics\_map | (Required) contains the SA and EH details for operations diagnostics. | `any` | n/a | yes |
+| diagnostics\_settings | (Required) Map with the diagnostics settings. See the required structure in the following example or in the CAF diagnostics module documentation. | `any` | n/a | yes |
+| location | (Required) Specifies the Azure location to deploy the resource. Changing this forces a new resource to be created. | `string` | n/a | yes |
+| log\_analytics\_workspace | (Required) contains the log analytics workspace details for operations diagnostics. | `any` | n/a | yes |
+| max\_length | (Optional) You can speficy a maximum length to the name of the resource. | `string` | `"60"` | no |
+| postfix | (Optional) You can use a postfix to the name of the resource. | `string` | `""` | no |
+| prefix | (Optional) You can use a prefix to the name of the resource. | `string` | `""` | no |
+| resource\_group\_name | (Required) Name of the resource group where to create the resource. Changing this forces a new resource to be created. | `string` | n/a | yes |
+| sql\_server | (Required) SQL Server Configuration object, see Parameters section below. | `any` | n/a | yes |
+| subnet\_id\_list | (Optional) List of subnet identifiers for the resource to be created. | `map(string)` | `{}` | no |
+| tags | (Required) map of tags for the deployment. | `map` | `{}` | no |
 
 ## Outputs
 
