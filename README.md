@@ -1,4 +1,5 @@
 [![VScodespaces](https://img.shields.io/endpoint?url=https%3A%2F%2Faka.ms%2Fvso-badge)](https://online.visualstudio.com/environments/new?name=terraform-azurerm-caf-sql-server&repo=aztfmod/terraform-azurerm-caf-sql-server)
+[![Gitter](https://badges.gitter.im/aztfmod/community.svg)](https://gitter.im/aztfmod/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 # Creates an Azure SQL Server
 
@@ -34,24 +35,47 @@ module "sql_server" {
 }
 ```
 
+<!--- BEGIN_TF_DOCS --->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| azurecaf | n/a |
+| azurerm | n/a |
+| random | n/a |
+
 ## Inputs
 
-| Name | Type | Default | Description |
-| -- | -- | -- | -- |
-| resource_group_name | string | None | (Required) Name of the resource group where to create the resource. Changing this forces a new resource to be created. |
-| location | string | None | (Required) Specifies the Azure location to deploy the resource. Changing this forces a new resource to be created.  |
-| tags | map | None | (Required) Map of tags for the deployment.  |
-| log_analytics_workspace | string | None | (Required) Log Analytics Workspace. |
-| diagnostics_map | map | None | (Required) Map with the diagnostics repository information.  |
-| diagnostics_settings | object | None | (Required) Map with the diagnostics settings. See the required structure in the following example or in the diagnostics module documentation. |
-| convention | string | None | (Required) Naming convention to be used (check at the naming convention module for possible values).  |
-| prefix | string | None | (Optional) Prefix to be used. |
-| postfix | string | None | (Optional) Postfix to be used. |
-| max_length | string | None | (Optional) maximum length to the name of the resource. |
-| sql_server | object | None | (Required) SQL Server Configuration object (see details below). |
-| subnet_id_list | string | None | (Optional) Subnet identifier for the resource to be created |
-| aad_admin | object | None | (Optional) Azure AD object to use as SQL Server administrator |
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| aad\_admin | (Optional) Azure AD object to use as SQL Server administrator. | `map` | `{}` | no |
+| convention | (Required) Naming convention to be used (check at the naming convention module for possible values). | `string` | `"cafrandom"` | no |
+| diagnostics\_map | (Required) contains the SA and EH details for operations diagnostics. | `any` | n/a | yes |
+| diagnostics\_settings | (Required) Map with the diagnostics settings. See the required structure in the following example or in the CAF diagnostics module documentation. | `any` | n/a | yes |
+| location | (Required) Specifies the Azure location to deploy the resource. Changing this forces a new resource to be created. | `string` | n/a | yes |
+| log\_analytics\_workspace | (Required) contains the log analytics workspace details for operations diagnostics. | `any` | n/a | yes |
+| max\_length | (Optional) You can speficy a maximum length to the name of the resource. | `string` | `"60"` | no |
+| postfix | (Optional) You can use a postfix to the name of the resource. | `string` | `""` | no |
+| prefix | (Optional) You can use a prefix to the name of the resource. | `string` | `""` | no |
+| resource\_group\_name | (Required) Name of the resource group where to create the resource. Changing this forces a new resource to be created. | `string` | n/a | yes |
+| sql\_server | (Required) SQL Server Configuration object, see Parameters section below. | `any` | n/a | yes |
+| subnet\_id\_list | (Optional) List of subnet identifiers for the resource to be created. | `map(string)` | `{}` | no |
+| tags | (Required) map of tags for the deployment. | `map` | `{}` | no |
 
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| id | Returns the ID of the created SQL Server |
+| name | Returns the name of the created SQL Server |
+| object | Returns the full object of the created SQL Server |
+| password | Value of the administrative password of the SQL Server - Recommended to get this output and store in AKV |
+
+<!--- END_TF_DOCS --->
 
 ## Parameters
 
@@ -160,13 +184,3 @@ diagnostics_settings = {
     ]
 }
 ```
-
-
-## Output
-
-| Name | Type | Description |
-| -- | -- | -- |
-| object | object(sensitive) | Returns the full object of the created SQL Server |
-| name | string | Returns the name of the created SQL Server |
-| id | string | Returns the ID of the created SQL Server |
-| password | string(sensitive) | Value of the administrative password of the SQL Server - Recommended to get this output and store in AKV|
